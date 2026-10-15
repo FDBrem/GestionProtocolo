@@ -10,6 +10,7 @@ module teutonic.gestionprotocolos {
     requires java.sql;
     requires org.jdbi.v3.core;
     requires org.jdbi.v3.sqlobject;
+    requires org.slf4j;
 
     opens teutonic.gestionprotocolos.repository to org.jdbi.v3.core;
     opens db.migration to flyway.core;
