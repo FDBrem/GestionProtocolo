@@ -1,5 +1,8 @@
 package teutonic.gestionprotocolos.config;
 
+import org.jdbi.v3.core.Jdbi;
+import teutonic.gestionprotocolos.database.JdbiProvider;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,8 +11,15 @@ import java.sql.SQLException;
 
 public final class DatabaseConfig {
 
-    //ruta al archivo de sqlite, ahora esta para que se cree donde esta la app
-    private static final String DB_URL = "jdbc:sqlite:gestion_protocolo_data.db";
+    // Ruta a la base de datos SQLite
+    private static final String DB_URL =
+            "jdbc:sqlite:gestion_protocolo_data.db";
+
+    private static final Jdbi JDBI = JdbiProvider.create();
+    
+    public static Jdbi getJdbi() {
+        return JDBI;
+    }
 
     //esto es para activar las fk, parece que sqlite no las tiene activada y hay que hacerlo siempre porq no hace persistencia de esa config
     public static Connection getConnection() throws SQLException {
