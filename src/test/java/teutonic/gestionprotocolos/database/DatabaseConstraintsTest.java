@@ -24,20 +24,9 @@ class DatabaseConstraintsTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        String url = "jdbc:sqlite:"
-                + tempDir.resolve("test.db").toAbsolutePath();
-
-        Flyway.configure()
-                .dataSource(url, null, null)
-                .locations("filesystem:src/main/resources/db/migration")
-                .load()
-                .migrate();
-
-        connection = DriverManager.getConnection(url);
-
-        try (Statement statement = connection.createStatement()) {
-            statement.execute("PRAGMA foreign_keys = ON");
-        }
+        connection = TestDatabase.create(
+                tempDir.resolve("test.db")
+        );
 
         insert("""
                 INSERT INTO serie_muestra (id_serie, nombre)
@@ -45,19 +34,20 @@ class DatabaseConstraintsTest {
                 """);
 
         insert("""
-                INSERT INTO producto (id_producto, nombre, id_serie)
+                INSERT INTO producto
+                    (id_producto, nombre, id_serie)
                 VALUES (1, 'Producto test', 1)
                 """);
 
         insert("""
                 INSERT INTO plantilla
                     (id_plantilla, nombre, familia, id_producto)
-                VALUES
-                    (1, 'Plantilla test', 'MUESTRA_PRODUCTO', 1)
+                VALUES (1, 'Plantilla test', 'MUESTRA_PRODUCTO', 1)
                 """);
 
         insert("""
-                INSERT INTO analisis (id_analisis, nombre, tipo_valor)
+                INSERT INTO analisis
+                    (id_analisis, nombre, tipo_valor)
                 VALUES (1, 'Analisis test', 'RECUENTO')
                 """);
     }
