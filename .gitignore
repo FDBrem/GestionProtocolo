@@ -12,6 +12,14 @@ target/
 *.iws
 *.iml
 *.ipr
+.idea/shelf/
+.idea/workspace.xml
+.idea/httpRequests/
+.idea/queries/
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/data_source_mapping.xml
 
 ### Eclipse ###
 .apt_generated
@@ -37,3 +45,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### db ###
+*.db
+*.db-shm
+*.db-wal
