@@ -8,7 +8,10 @@ module teutonic.gestionprotocolos {
     requires org.kordamp.bootstrapfx.core;
     requires flyway.core;
     requires java.sql;
+    requires org.jdbi.v3.core;
+    requires org.jdbi.v3.sqlobject;
 
+    opens teutonic.gestionprotocolos.repository to org.jdbi.v3.core;
     opens db.migration to flyway.core;
     opens teutonic.gestionprotocolos to javafx.fxml;
     exports teutonic.gestionprotocolos;
