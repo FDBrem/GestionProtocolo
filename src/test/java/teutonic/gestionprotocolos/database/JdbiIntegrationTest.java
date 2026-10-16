@@ -4,7 +4,7 @@ import org.jdbi.v3.core.Jdbi;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import teutonic.gestionprotocolos.model.ProtocoloRecord;
+import teutonic.gestionprotocolos.persistence.records.ProtocoloRecord;
 import teutonic.gestionprotocolos.repository.ProtocoloRepository;
 
 import java.nio.file.Path;
