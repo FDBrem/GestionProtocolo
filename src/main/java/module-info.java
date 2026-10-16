@@ -14,8 +14,9 @@ module teutonic.gestionprotocolos {
     requires org.mapstruct;
 
     opens teutonic.gestionprotocolos.repository to org.jdbi.v3.core;
+    opens teutonic.gestionprotocolos.persistence.records to org.jdbi.v3.core;
     opens db.migration to flyway.core;
     opens teutonic.gestionprotocolos to javafx.fxml;
     exports teutonic.gestionprotocolos;
-    opens teutonic.gestionprotocolos.mapper to org.jdbi.v3.core;
+    opens teutonic.gestionprotocolos.mapper to org.jdbi.v3.core, org.mapstruct;
 }
