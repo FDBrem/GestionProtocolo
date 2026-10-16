@@ -16,4 +16,5 @@ module teutonic.gestionprotocolos {
     opens db.migration to flyway.core;
     opens teutonic.gestionprotocolos to javafx.fxml;
     exports teutonic.gestionprotocolos;
+    opens teutonic.gestionprotocolos.mapper to org.jdbi.v3.core;
 }
