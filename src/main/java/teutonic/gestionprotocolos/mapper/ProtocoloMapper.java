@@ -1,8 +1,8 @@
-package teutonic.gestionprotocolos.repository;
+package teutonic.gestionprotocolos.mapper;
 
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
-import teutonic.gestionprotocolos.model.ProtocoloRecord;
+import teutonic.gestionprotocolos.persistence.records.ProtocoloRecord;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

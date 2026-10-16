@@ -4,7 +4,8 @@ import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.customizer.Bind;
-import teutonic.gestionprotocolos.model.ProtocoloRecord;
+import teutonic.gestionprotocolos.mapper.ProtocoloMapper;
+import teutonic.gestionprotocolos.persistence.records.ProtocoloRecord;
 
 import java.util.Optional;
 

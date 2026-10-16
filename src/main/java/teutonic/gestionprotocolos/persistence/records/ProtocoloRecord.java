@@ -1,4 +1,4 @@
-package teutonic.gestionprotocolos.model;
+package teutonic.gestionprotocolos.persistence.records;
 
 import java.time.LocalDate;
 
