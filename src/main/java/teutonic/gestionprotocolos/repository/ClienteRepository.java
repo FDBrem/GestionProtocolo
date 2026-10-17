@@ -1,16 +1,15 @@
 package teutonic.gestionprotocolos.repository;
 
-import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
+import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
-import teutonic.gestionprotocolos.mapper.ClienteMapper;
 import teutonic.gestionprotocolos.persistence.records.ClienteRecord;
 
 import java.util.List;
 import java.util.Optional;
 
-@RegisterRowMapper(ClienteMapper.class)
+@RegisterConstructorMapper(ClienteRecord.class)
 public interface ClienteRepository {
 
     @SqlUpdate("""
@@ -24,12 +23,16 @@ public interface ClienteRepository {
     }
 
     @SqlQuery("""
-            SELECT id_cliente, nombre FROM cliente WHERE id_cliente = :id
+            SELECT id_cliente AS idCliente, nombre
+            FROM cliente
+            WHERE id_cliente = :id
             """)
     Optional<ClienteRecord> findById(@Bind("id") long id);
 
     @SqlQuery("""
-            SELECT id_cliente, nombre FROM cliente
+            SELECT id_cliente AS idCliente, nombre
+            FROM cliente
+            ORDER BY nombre
             """)
     List<ClienteRecord> findAll();
 
