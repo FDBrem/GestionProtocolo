@@ -118,4 +118,48 @@ public interface ResultadoRepository {
             @Bind("pendiente") int pendiente,
             @Bind("observacion") String observacion
     );
+
+    @SqlUpdate("""
+            DELETE FROM resultado
+            WHERE id_resultado = :id
+            """)
+    int eliminar(@Bind("id") long id);
+
+    // Métodos de conveniencia compatibles
+    default Optional<ResultadoRecord> findById(long id) {
+        return buscarPorId(id);
+    }
+
+    default int delete(long id) {
+        return eliminar(id);
+    }
+
+    default long insert(ResultadoRecord resultado) {
+        return insertar(
+                resultado.idMuestra(),
+                resultado.idAnalisis(),
+                resultado.horaControl(),
+                resultado.valor(),
+                resultado.menorQue() != null ? resultado.menorQue() : 0,
+                resultado.colonias(),
+                resultado.presencia(),
+                resultado.conforme(),
+                resultado.pendiente() != null ? resultado.pendiente() : 0,
+                resultado.observacion()
+        );
+    }
+
+    default int update(ResultadoRecord resultado) {
+        return actualizar(
+                resultado.idResultado(),
+                resultado.horaControl(),
+                resultado.valor(),
+                resultado.menorQue() != null ? resultado.menorQue() : 0,
+                resultado.colonias(),
+                resultado.presencia(),
+                resultado.conforme(),
+                resultado.pendiente() != null ? resultado.pendiente() : 0,
+                resultado.observacion()
+        );
+    }
 }
