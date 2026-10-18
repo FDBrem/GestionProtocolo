@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+
+
+
+<BorderPane xmlns="http://javafx.com/javafx/27"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="teutonic.gestionprotocolos.MainController"
+            stylesheets="@styles.css">
+
+    <!-- SIDEBAR -->
+    <left>
+        <VBox styleClass="sidebar"
+              prefHeight="250"
+              spacing="10">
+
+            <padding>
+                <Insets top="25"
+                        right="18"
+                        bottom="25"
+                        left="18"/>
+            </padding>
+
+            <Label text="Laboratorio Interno"
+                   styleClass="sidebar-title"/>
+
+            <Button text="+ Nuevo análisis"
+                    prefHeight="45"
+                    maxWidth="Infinity"/>
+
+            <Button text="☰   Control de pollo"
+                    prefHeight="45"
+                    maxWidth="Infinity"/>
+
+            <Button text="⌕   Buscar"
+                    prefHeight="45"
+                    maxWidth="Infinity"/>
+
+            <Button text="▥   Informes"
+                    prefHeight="45"
+                    maxWidth="Infinity"/>
+
+            <Button text="▱   Catálogos"
+                    prefHeight="45"
+                    maxWidth="Infinity"/>
+
+            <Button text="↓   Respaldo"
+                    prefHeight="45"
+                    maxWidth="Infinity"/>
+
+        </VBox>
+    </left>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <center>
+
+        <BorderPane styleClass="main-content">
+
+            <!-- HEADER -->
+            <top>
+
+                <VBox spacing="6">
+
+                    <padding>
+                        <Insets top="30"
+                                right="35"
+                                bottom="25"
+                                left="40"/>
+                    </padding>
+
+                    <Label text="Nuevo análisis"
+                           styleClass="page-title"/>
+
+                    <Label text="Elegí el formulario para comenzar un nuevo análisis."
+                           styleClass="page-subtitle"/>
+
+                </VBox>
+
+            </top>
+
+            <!-- ÁREA DE TRABAJO -->
+            <center>
+
+                <VBox spacing="20">
+
+                    <padding>
+                        <Insets top="10"
+                                right="40"
+                                bottom="40"
+                                left="40"/>
+                    </padding>
+
+                    <Label text="MUESTRAS DE PRODUCTO"
+                           styleClass="section-title"/>
+
+                    <GridPane fx:id="cardsGrid"
+                              hgap="15"
+                              vgap="15"/>
+
+                </VBox>
+
+            </center>
+
+        </BorderPane>
+
+    </center>
+
+</BorderPane>
