@@ -12,6 +12,8 @@ public class MainController {
     @FXML
     private GridPane cardsGrid;
 
+    private AnalysisCardController tarjetaSeleccionada;
+
     @FXML
     public void initialize() {
 
@@ -65,11 +67,9 @@ public class MainController {
     ) {
 
         try {
-
             FXMLLoader loader = new FXMLLoader(
                     MainController.class.getResource("analysis-card.fxml")
             );
-
             Node card = loader.load();
 
             AnalysisCardController controller =
@@ -81,12 +81,23 @@ public class MainController {
                     numeroMuestra
             );
 
+            controller.setOnClick(() -> {
+
+                if (tarjetaSeleccionada != null) {
+                    tarjetaSeleccionada.setSelected(false);
+                }
+
+                controller.setSelected(true);
+
+                tarjetaSeleccionada = controller;
+
+                System.out.println("Click en: " + nombre);
+            });
+
             cardsGrid.add(card, columna, fila);
 
         } catch (IOException e) {
-
             e.printStackTrace();
-
         }
     }
 }

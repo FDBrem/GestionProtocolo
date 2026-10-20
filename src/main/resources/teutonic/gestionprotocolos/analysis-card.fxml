@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox
+<VBox   fx:id="card"
         xmlns="http://javafx.com/javafx/27"
         xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="teutonic.gestionprotocolos.AnalysisCardController"
