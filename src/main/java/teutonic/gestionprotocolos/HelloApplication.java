@@ -5,13 +5,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import atlantafx.base.theme.PrimerLight;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class HelloApplication extends Application {
 
+    private static final Logger log =
+            LoggerFactory.getLogger(HelloApplication.class);
+
     @Override
     public void start(Stage stage) throws IOException {
+        Thread.setDefaultUncaughtExceptionHandler(
+                new GlobalExceptionHandler()
+        );
+
+        log.info("Aplicación iniciada correctamente");
 
         Application.setUserAgentStylesheet(
                 new PrimerLight().getUserAgentStylesheet()
