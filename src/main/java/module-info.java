@@ -1,6 +1,7 @@
 module teutonic.gestionprotocolos {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.slf4j;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
