@@ -1,15 +1,22 @@
 package teutonic.gestionprotocolos;
 
+import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.flywaydb.core.Flyway;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import teutonic.gestionprotocolos.Handler.GlobalExceptionHandler;
 import teutonic.gestionprotocolos.config.DatabaseConfig;
 
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(HelloApplication.class);
 
     @Override
     public void init() throws Exception {

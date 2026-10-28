@@ -8,51 +8,78 @@
 <?import javafx.scene.layout.GridPane?>
 
 
-
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Separator?>
 <BorderPane xmlns="http://javafx.com/javafx/27"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="teutonic.gestionprotocolos.MainController"
+            fx:controller="teutonic.gestionprotocolos.Controller.MainController"
             stylesheets="@styles.css">
 
     <!-- SIDEBAR -->
     <left>
         <VBox styleClass="sidebar"
-              prefHeight="250"
-              spacing="10">
+              prefWidth="240"
+              spacing="6">
 
             <padding>
-                <Insets top="25"
-                        right="18"
-                        bottom="25"
-                        left="18"/>
+                <Insets top="28"
+                        right="16"
+                        bottom="24"
+                        left="16"/>
             </padding>
 
-            <Label text="Laboratorio Interno"
-                   styleClass="sidebar-title"/>
+            <!-- IDENTIDAD DEL SISTEMA -->
+            <VBox spacing="3"
+                  styleClass="sidebar-header">
 
-            <Button text="+ Nuevo análisis"
-                    prefHeight="45"
-                    maxWidth="Infinity"/>
+                <Label text="LABORATORIO"
+                       styleClass="sidebar-title"/>
 
-            <Button text="☰   Control de pollo"
-                    prefHeight="45"
-                    maxWidth="Infinity"/>
+                <Label text="Gestión de Protocolos"
+                       styleClass="sidebar-subtitle"/>
 
-            <Button text="⌕   Buscar"
-                    prefHeight="45"
-                    maxWidth="Infinity"/>
+            </VBox>
 
-            <Button text="▥   Informes"
-                    prefHeight="45"
-                    maxWidth="Infinity"/>
+            <Region prefHeight="18"/>
 
-            <Button text="▱   Catálogos"
-                    prefHeight="45"
-                    maxWidth="Infinity"/>
+            <!-- NAVEGACIÓN PRINCIPAL -->
+            <VBox spacing="4">
 
-            <Button text="↓   Respaldo"
-                    prefHeight="45"
-                    maxWidth="Infinity"/>
+                <Button text="▣   Nuevo análisis"
+                        styleClass="sidebar-button, sidebar-button-active"
+                        maxWidth="Infinity"/>
+
+                <Button text="☷   Control de pollo"
+                        styleClass="sidebar-button"
+                        maxWidth="Infinity"/>
+
+                <Button text="⌕   Buscar"
+                        styleClass="sidebar-button"
+                        maxWidth="Infinity"/>
+
+                <Button text="▤   Informes"
+                        styleClass="sidebar-button"
+                        maxWidth="Infinity"/>
+
+                <Button text="▱   Catálogos"
+                        styleClass="sidebar-button"
+                        maxWidth="Infinity"/>
+
+            </VBox>
+
+            <!-- ESPACIO FLEXIBLE -->
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- ACCIONES SECUNDARIAS -->
+            <VBox spacing="4">
+
+                <Separator styleClass="sidebar-separator"/>
+
+                <Button text="↓   Respaldo"
+                        styleClass="sidebar-button sidebar-button-secondary"
+                        maxWidth="Infinity"/>
+
+            </VBox>
 
         </VBox>
     </left>
@@ -68,9 +95,9 @@
                 <VBox spacing="6">
 
                     <padding>
-                        <Insets top="30"
-                                right="35"
-                                bottom="25"
+                        <Insets top="34"
+                                right="40"
+                                bottom="26"
                                 left="40"/>
                     </padding>
 
@@ -87,7 +114,7 @@
             <!-- ÁREA DE TRABAJO -->
             <center>
 
-                <VBox spacing="20">
+                <VBox spacing="16">
 
                     <padding>
                         <Insets top="10"

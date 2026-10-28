@@ -1,4 +1,4 @@
-package teutonic.gestionprotocolos;
+package teutonic.gestionprotocolos.Controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -1,4 +1,4 @@
-package teutonic.gestionprotocolos;
+package teutonic.gestionprotocolos.Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,7 +68,7 @@ public class MainController {
 
         try {
             FXMLLoader loader = new FXMLLoader(
-                    MainController.class.getResource("analysis-card.fxml")
+                    MainController.class.getResource("/teutonic/gestionprotocolos/analysis-card.fxml")
             );
             Node card = loader.load();
 

@@ -11,8 +11,8 @@ module teutonic.gestionprotocolos {
     requires java.sql;
     requires org.jdbi.v3.core;
     requires org.jdbi.v3.sqlobject;
-    requires org.slf4j;
     requires org.mapstruct;
+    requires atlantafx.base;
 
     opens teutonic.gestionprotocolos.repository to org.jdbi.v3.core;
     opens teutonic.gestionprotocolos.persistence.records to org.jdbi.v3.core;
@@ -20,4 +20,5 @@ module teutonic.gestionprotocolos {
     opens teutonic.gestionprotocolos to javafx.fxml;
     exports teutonic.gestionprotocolos;
     opens teutonic.gestionprotocolos.mapper to org.jdbi.v3.core, org.mapstruct;
+    opens teutonic.gestionprotocolos.Controller to javafx.fxml;
 }
