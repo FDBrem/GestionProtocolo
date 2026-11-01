@@ -3,50 +3,70 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.GridPane?>
-
-
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<BorderPane xmlns="http://javafx.com/javafx/27"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="teutonic.gestionprotocolos.Controller.MainController"
-            stylesheets="@styles.css">
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.VBox?>
 
-    <!-- SIDEBAR -->
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="teutonic.gestionprotocolos.Controller.MainController"
+            styleClass="application-root">
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
     <left>
-        <VBox styleClass="sidebar"
-              prefWidth="240"
-              spacing="6">
+
+        <VBox prefWidth="270"
+              styleClass="sidebar">
 
             <padding>
                 <Insets top="28"
-                        right="16"
-                        bottom="24"
-                        left="16"/>
+                        right="18"
+                        bottom="18"
+                        left="18"/>
             </padding>
 
-            <!-- IDENTIDAD DEL SISTEMA -->
+            <!-- IDENTIDAD -->
+
             <VBox spacing="3"
-                  styleClass="sidebar-header">
+                  styleClass="brand-container">
 
-                <Label text="LABORATORIO"
-                       styleClass="sidebar-title"/>
+                <HBox spacing="12"
+                      alignment="CENTER_LEFT">
 
-                <Label text="Gestión de Protocolos"
-                       styleClass="sidebar-subtitle"/>
+                    <Label text="⚗"
+                           styleClass="brand-icon"/>
+
+                    <VBox spacing="0">
+                        <Label text="LabMicro"
+                               styleClass="brand-title"/>
+
+                        <Label text="Bonnin Hnos."
+                               styleClass="brand-subtitle"/>
+                    </VBox>
+
+                </HBox>
 
             </VBox>
 
-            <Region prefHeight="18"/>
 
-            <!-- NAVEGACIÓN PRINCIPAL -->
-            <VBox spacing="4">
+            <!-- NAVEGACIÓN -->
 
-                <Button text="▣   Nuevo análisis"
-                        styleClass="sidebar-button, sidebar-button-active"
+            <VBox spacing="6"
+                  VBox.vgrow="ALWAYS">
+
+                <padding>
+                    <Insets top="32"/>
+                </padding>
+
+                <Button text="＋   Nuevo análisis"
+                        styleClass="sidebar-button sidebar-button-active"
                         maxWidth="Infinity"/>
 
                 <Button text="☷   Control de pollo"
@@ -57,21 +77,13 @@
                         styleClass="sidebar-button"
                         maxWidth="Infinity"/>
 
-                <Button text="▤   Informes"
+                <Button text="▥   Informes"
                         styleClass="sidebar-button"
                         maxWidth="Infinity"/>
 
                 <Button text="▱   Catálogos"
                         styleClass="sidebar-button"
                         maxWidth="Infinity"/>
-
-            </VBox>
-
-            <!-- ESPACIO FLEXIBLE -->
-            <Region VBox.vgrow="ALWAYS"/>
-
-            <!-- ACCIONES SECUNDARIAS -->
-            <VBox spacing="4">
 
                 <Separator styleClass="sidebar-separator"/>
 
@@ -81,56 +93,310 @@
 
             </VBox>
 
+
+            <!-- ESTADO -->
+
+            <VBox spacing="4"
+                  styleClass="connection-status">
+
+                <Label text="Sin conexión."
+                       styleClass="connection-title"/>
+
+                <Label text="Los datos quedan solo en este equipo."
+                       styleClass="connection-description"
+                       wrapText="true"/>
+
+            </VBox>
+
         </VBox>
+
     </left>
 
-    <!-- CONTENIDO PRINCIPAL -->
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+         ===================================================== -->
+
     <center>
 
         <BorderPane styleClass="main-content">
 
-            <!-- HEADER -->
+
+            <!-- =================================================
+                 HEADER
+                 ================================================= -->
+
             <top>
 
-                <VBox spacing="6">
+                <HBox alignment="CENTER_LEFT"
+                      spacing="20"
+                      styleClass="page-header">
 
-                    <padding>
-                        <Insets top="34"
-                                right="40"
-                                bottom="26"
-                                left="40"/>
-                    </padding>
+                    <VBox spacing="5"
+                          HBox.hgrow="ALWAYS">
 
-                    <Label text="Nuevo análisis"
-                           styleClass="page-title"/>
+                        <Label text="Nuevo análisis"
+                               styleClass="page-title"/>
 
-                    <Label text="Elegí el formulario para comenzar un nuevo análisis."
-                           styleClass="page-subtitle"/>
+                        <Label text="Elegí el formulario. El encabezado se completa solo con el método, el peso de muestra y el próximo número."
+                               styleClass="page-subtitle"
+                               wrapText="true"/>
 
-                </VBox>
+                    </VBox>
+
+                    <Label text="01/11/2026"
+                           styleClass="date-badge"/>
+
+                </HBox>
 
             </top>
 
-            <!-- ÁREA DE TRABAJO -->
+
+            <!-- =================================================
+                 ÁREA DE TRABAJO
+                 ================================================= -->
+
             <center>
 
-                <VBox spacing="16">
+                <HBox spacing="28"
+                      styleClass="workspace">
 
                     <padding>
-                        <Insets top="10"
-                                right="40"
-                                bottom="40"
-                                left="40"/>
+                        <Insets top="0"
+                                right="32"
+                                bottom="32"
+                                left="32"/>
                     </padding>
 
-                    <Label text="MUESTRAS DE PRODUCTO"
-                           styleClass="section-title"/>
 
-                    <GridPane fx:id="cardsGrid"
-                              hgap="15"
-                              vgap="15"/>
+                    <!-- =============================================
+                         COLUMNA IZQUIERDA
+                         ============================================= -->
 
-                </VBox>
+                    <ScrollPane fitToWidth="true"
+                                hbarPolicy="NEVER"
+                                vbarPolicy="AS_NEEDED"
+                                styleClass="forms-scroll-pane"
+                                HBox.hgrow="ALWAYS">
+
+                        <content>
+
+                            <VBox spacing="24">
+
+                                <!-- MUESTRAS DE PRODUCTO -->
+
+                                <VBox spacing="10">
+
+                                    <Label text="MUESTRAS DE PRODUCTO"
+                                           styleClass="section-title"/>
+
+                                    <GridPane fx:id="productCardsGrid"
+                                              hgap="12"
+                                              vgap="12"
+                                              prefWidth="800"/>
+
+                                </VBox>
+
+
+                                <!-- HARINAS -->
+
+                                <VBox spacing="10">
+
+                                    <Label text="HARINAS (SALMONELLA)"
+                                           styleClass="section-title"/>
+
+                                    <GridPane fx:id="flourCardsGrid"
+                                              hgap="12"
+                                              vgap="12"
+                                              prefWidth="800"/>
+
+                                </VBox>
+
+
+                                <!-- MONITOREO AMBIENTAL -->
+
+                                <VBox spacing="10">
+
+                                    <Label text="MONITOREO AMBIENTAL"
+                                           styleClass="section-title"/>
+
+                                    <GridPane fx:id="environmentalCardsGrid"
+                                              hgap="12"
+                                              vgap="12"
+                                              prefWidth="800"/>
+
+                                </VBox>
+
+                            </VBox>
+
+                        </content>
+
+                    </ScrollPane>
+
+
+                    <!-- =============================================
+                         COLUMNA DERECHA
+                         ============================================= -->
+
+                    <VBox prefWidth="410"
+                          minWidth="380"
+                          maxWidth="410"
+                          spacing="18"
+                          styleClass="form-preview">
+
+                        <padding>
+                            <Insets top="24"
+                                    right="28"
+                                    bottom="28"
+                                    left="28"/>
+                        </padding>
+
+
+                        <!-- TÍTULO -->
+
+                        <VBox spacing="8">
+
+                            <Label text="ENCABEZADO DEL FORMULARIO"
+                                   styleClass="form-preview-section-title"/>
+
+                            <Label fx:id="selectedFormTitle"
+                                   text="Partes de Trozado"
+                                   styleClass="form-preview-title"/>
+
+                        </VBox>
+
+
+                        <Separator/>
+
+
+                        <!-- DATOS -->
+
+                        <VBox spacing="0"
+                              styleClass="form-data">
+
+                            <HBox styleClass="form-data-row">
+
+                                <Label text="Fecha"
+                                       styleClass="form-data-label"/>
+
+                                <Label fx:id="formDate"
+                                       text="01/11/2026 (hoy)"
+                                       styleClass="form-data-value"
+                                       HBox.hgrow="ALWAYS"/>
+
+                            </HBox>
+
+
+                            <HBox styleClass="form-data-row">
+
+                                <Label text="Método"
+                                       styleClass="form-data-label"/>
+
+                                <Label fx:id="formMethod"
+                                       text="Malaxado en bolsa estéril"
+                                       styleClass="form-data-value"
+                                       HBox.hgrow="ALWAYS"/>
+
+                            </HBox>
+
+
+                            <HBox styleClass="form-data-row">
+
+                                <Label text="Kit"
+                                       styleClass="form-data-label"/>
+
+                                <Label fx:id="formKit"
+                                       text="Placas Petrifilm 3M"
+                                       styleClass="form-data-value"
+                                       HBox.hgrow="ALWAYS"/>
+
+                            </HBox>
+
+
+                            <HBox styleClass="form-data-row">
+
+                                <Label text="Peso de muestra"
+                                       styleClass="form-data-label"/>
+
+                                <Label fx:id="formWeight"
+                                       text="22,5 g"
+                                       styleClass="form-data-value"
+                                       HBox.hgrow="ALWAYS"/>
+
+                            </HBox>
+
+
+                            <HBox styleClass="form-data-row">
+
+                                <Label text="Punto de toma"
+                                       styleClass="form-data-label"/>
+
+                                <Label fx:id="formSamplingPoint"
+                                       text="Trozado"
+                                       styleClass="form-data-value"
+                                       HBox.hgrow="ALWAYS"/>
+
+                            </HBox>
+
+
+                            <HBox styleClass="form-data-row">
+
+                                <Label text="Protocolo"
+                                       styleClass="form-data-label"/>
+
+                                <Label fx:id="formProtocol"
+                                       text="Sin N° de protocolo"
+                                       styleClass="form-data-value"
+                                       HBox.hgrow="ALWAYS"/>
+
+                            </HBox>
+
+
+                            <HBox styleClass="form-data-row">
+
+                                <Label text="Próx. muestra N°"
+                                       styleClass="form-data-label"/>
+
+                                <Label fx:id="formNextSample"
+                                       text="648"
+                                       styleClass="form-data-value"
+                                       HBox.hgrow="ALWAYS"/>
+
+                            </HBox>
+
+                        </VBox>
+
+
+                        <!-- LÍMITES -->
+
+                        <VBox spacing="8">
+
+                            <Label text="LÍMITES DE ACEPTACIÓN"
+                                   styleClass="form-preview-section-title"/>
+
+                            <Label text="Staphylococcus &lt; 50 UFC/g"
+                                   styleClass="acceptance-limit"/>
+
+                            <Label text="Aerobios &lt; 100.000 UFC/g"
+                                   styleClass="acceptance-limit"/>
+
+                            <Label text="Enterobacterias &lt; 100 UFC/g"
+                                   styleClass="acceptance-limit"/>
+
+                        </VBox>
+
+
+                        <!-- BOTÓN -->
+
+                        <VBox VBox.vgrow="ALWAYS"/>
+
+                        <Button text="Comenzar carga"
+                                maxWidth="Infinity"
+                                styleClass="primary-action"/>
+
+                    </VBox>
+
+                </HBox>
 
             </center>
 

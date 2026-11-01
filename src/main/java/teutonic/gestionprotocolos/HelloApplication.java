@@ -47,7 +47,13 @@ public class HelloApplication extends Application {
                         HelloApplication.class.getResource("main-view.fxml")
                 );
 
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 1600, 900);
+
+        scene.getStylesheets().add(
+                HelloApplication.class
+                        .getResource("styles.css")
+                        .toExternalForm()
+        );
 
         stage.setTitle("Gestión de Protocolos");
         stage.setScene(scene);

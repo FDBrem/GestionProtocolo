@@ -9,15 +9,18 @@
       fx:controller="teutonic.gestionprotocolos.Controller.AnalysisCardController"
       fx:id="card"
       styleClass="analysis-card"
-      prefWidth="310"
-      prefHeight="188"
-      spacing="10">
+      prefWidth="245"
+      prefHeight="122"
+      minWidth="220"
+      minHeight="122"
+      maxHeight="122"
+      spacing="7">
 
     <padding>
-        <Insets top="24"
-                right="24"
-                bottom="22"
-                left="24"/>
+        <Insets top="16"
+                right="16"
+                bottom="14"
+                left="16"/>
     </padding>
 
     <Label fx:id="nombreLabel"
