@@ -21,7 +21,8 @@ public final class RepositoryProvider {
 
     private static final Jdbi JDBI = DatabaseConfig.getJdbi();
 
-    private RepositoryProvider() {}
+    private RepositoryProvider() {
+    }
 
     public static GranjaRepository getGranjaRepository() {
         return JDBI.onDemand(GranjaRepository.class);
@@ -39,9 +40,9 @@ public final class RepositoryProvider {
         return JDBI.onDemand(PlantillaRepository.class);
     }
 
-    public static AnalisisRepository getAnalisisRepository() {
-        return JDBI.onDemand(AnalisisRepository.class);
-    }
+  //  public static AnalisisRepository getAnalisisRepository() {
+  //      return JDBI.onDemand(AnalisisRepository.class);
+  //  }
 
     public static MuestraRepository getMuestraRepository() {
         return JDBI.onDemand(MuestraRepository.class);
@@ -51,13 +52,13 @@ public final class RepositoryProvider {
         return JDBI.onDemand(ProtocoloRepository.class);
     }
 
-    public static ProductoRepository getProductoRepository() {
-        return JDBI.onDemand(ProductoRepository.class);
-    }
+   // public static ProductoRepository getProductoRepository() {
+   //     return JDBI.onDemand(ProductoRepository.class);
+   // }
 
-    public static SerieMuestraRepository getSerieMuestraRepository() {
-        return JDBI.onDemand(SerieMuestraRepository.class);
-    }
+  //  public static SerieMuestraRepository getSerieMuestraRepository() {
+  //      return JDBI.onDemand(SerieMuestraRepository.class);
+  //  }
 
     public static ClienteRepository getClienteRepository() {
         return JDBI.onDemand(ClienteRepository.class);
