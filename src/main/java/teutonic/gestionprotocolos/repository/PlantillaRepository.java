@@ -5,12 +5,16 @@ import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
+import teutonic.gestionprotocolos.persistence.records.AnalisisPlantillaRecord;
+import teutonic.gestionprotocolos.persistence.records.PlantillaCompletaRecord;
 import teutonic.gestionprotocolos.persistence.records.PlantillaRecord;
 
 import java.util.List;
 import java.util.Optional;
 
 @RegisterConstructorMapper(PlantillaRecord.class)
+@RegisterConstructorMapper(AnalisisPlantillaRecord.class)
+@RegisterConstructorMapper(PlantillaCompletaRecord.class)
 public interface PlantillaRepository {
 
     @SqlQuery("""
@@ -162,6 +166,123 @@ public interface PlantillaRepository {
             WHERE id_plantilla = :id
             """)
     int eliminar(@Bind("id") long id);
+
+    @SqlQuery("""
+        SELECT
+            a.id_analisis AS idAnalisis,
+            a.nombre,
+            a.tipo_valor AS tipoValor,
+            a.unidad,
+            pa.orden,
+            pa.limite_max AS limiteMax,
+            pa.etiqueta_neg AS etiquetaNeg,
+            pa.etiqueta_pos AS etiquetaPos
+        FROM plantilla_analisis pa
+        JOIN analisis a
+            ON a.id_analisis = pa.id_analisis
+        WHERE pa.id_plantilla = :idPlantilla
+        ORDER BY pa.orden
+        """)
+    List<AnalisisPlantillaRecord> buscarAnalisis(
+            @Bind("idPlantilla") long idPlantilla
+    );
+
+    //buscar por ID
+    @SqlQuery("""
+        SELECT
+            p.id_plantilla AS idPlantilla,
+            p.nombre AS nombrePlantilla,
+            p.familia,
+            p.id_producto AS idProducto,
+            p.metodo_default AS metodoDefault,
+            p.equipo_default AS equipoDefault,
+            p.peso_muestra_g AS pesoMuestraG,
+            p.superficie_cm2 AS superficieCm2,
+            p.usa_numero AS usaNumero,
+
+            a.id_analisis AS idAnalisis,
+            a.nombre AS nombreAnalisis,
+            a.tipo_valor AS tipoValor,
+            a.unidad,
+            pa.orden,
+            pa.limite_max AS limiteMax,
+            pa.etiqueta_neg AS etiquetaNeg,
+            pa.etiqueta_pos AS etiquetaPos
+
+        FROM plantilla p
+        LEFT JOIN plantilla_analisis pa
+            ON pa.id_plantilla = p.id_plantilla
+        LEFT JOIN analisis a
+            ON a.id_analisis = pa.id_analisis
+        WHERE p.id_plantilla = :id
+        ORDER BY pa.orden
+        """)
+    List<PlantillaCompletaRecord> buscarCompletaPorId(@Bind("id") long id);
+
+    //listar todas las plantillas
+    @SqlQuery("""
+        SELECT
+            p.id_plantilla AS idPlantilla,
+            p.nombre AS nombrePlantilla,
+            p.familia,
+            p.id_producto AS idProducto,
+            p.metodo_default AS metodoDefault,
+            p.equipo_default AS equipoDefault,
+            p.peso_muestra_g AS pesoMuestraG,
+            p.superficie_cm2 AS superficieCm2,
+            p.usa_numero AS usaNumero,
+
+            a.id_analisis AS idAnalisis,
+            a.nombre AS nombreAnalisis,
+            a.tipo_valor AS tipoValor,
+            a.unidad,
+            pa.orden,
+            pa.limite_max AS limiteMax,
+            pa.etiqueta_neg AS etiquetaNeg,
+            pa.etiqueta_pos AS etiquetaPos
+
+        FROM plantilla p
+        LEFT JOIN plantilla_analisis pa
+            ON pa.id_plantilla = p.id_plantilla
+        LEFT JOIN analisis a
+            ON a.id_analisis = pa.id_analisis
+        ORDER BY p.nombre, pa.orden
+        """)
+    List<PlantillaCompletaRecord> listarTodasCompletas();
+
+    //buscar x producto
+    @SqlQuery("""
+        SELECT
+            p.id_plantilla AS idPlantilla,
+            p.nombre AS nombrePlantilla,
+            p.familia,
+            p.id_producto AS idProducto,
+            p.metodo_default AS metodoDefault,
+            p.equipo_default AS equipoDefault,
+            p.peso_muestra_g AS pesoMuestraG,
+            p.superficie_cm2 AS superficieCm2,
+            p.usa_numero AS usaNumero,
+
+            a.id_analisis AS idAnalisis,
+            a.nombre AS nombreAnalisis,
+            a.tipo_valor AS tipoValor,
+            a.unidad,
+            pa.orden,
+            pa.limite_max AS limiteMax,
+            pa.etiqueta_neg AS etiquetaNeg,
+            pa.etiqueta_pos AS etiquetaPos
+
+        FROM plantilla p
+        LEFT JOIN plantilla_analisis pa
+            ON pa.id_plantilla = p.id_plantilla
+        LEFT JOIN analisis a
+            ON a.id_analisis = pa.id_analisis
+        WHERE p.id_producto = :idProducto
+        ORDER BY p.nombre, pa.orden
+        """)
+    List<PlantillaCompletaRecord> buscarCompletasPorProducto(
+            @Bind("idProducto") long idProducto
+    );
 
     //metodos de conveniencia compatibles
     default Optional<PlantillaRecord> findById(long id) {
