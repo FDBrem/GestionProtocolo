@@ -2,16 +2,16 @@ package teutonic.gestionprotocolos.database;
 
 import org.jdbi.v3.core.Jdbi;
 import teutonic.gestionprotocolos.config.DatabaseConfig;
-import teutonic.gestionprotocolos.repository.AnalisisRepository;
+//import teutonic.gestionprotocolos.repository.AnalisisRepository;
 import teutonic.gestionprotocolos.repository.ClienteRepository;
 import teutonic.gestionprotocolos.repository.GranjaRepository;
 import teutonic.gestionprotocolos.repository.MuestraRepository;
 import teutonic.gestionprotocolos.repository.PlantillaRepository;
-import teutonic.gestionprotocolos.repository.ProductoRepository;
+//import teutonic.gestionprotocolos.repository.ProductoRepository;
 import teutonic.gestionprotocolos.repository.ProtocoloRepository;
 import teutonic.gestionprotocolos.repository.ResultadoRepository;
 import teutonic.gestionprotocolos.repository.SectorRepository;
-import teutonic.gestionprotocolos.repository.SerieMuestraRepository;
+//import teutonic.gestionprotocolos.repository.SerieMuestraRepository;
 
 public final class RepositoryProvider {
 

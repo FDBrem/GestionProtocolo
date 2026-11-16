@@ -35,8 +35,8 @@ class DatabaseConstraintsTest {
 
         insert("""
                 INSERT INTO producto
-                    (id_producto, nombre, id_serie)
-                VALUES (1, 'Producto test', 1)
+                    (id_producto, nombre, id_serie, nombre_normalizado)
+                VALUES (1, 'Producto test', 1, 'producto test');
                 """);
 
         insert("""
@@ -74,9 +74,7 @@ class DatabaseConstraintsTest {
     }
 
     @Test
-    void rejectsDuplicateSampleNumberWithinSeries()
-            throws SQLException {
-
+    void rejectsDuplicateSampleCorrelativeWithinSeries() throws SQLException {
         insertProtocol(1, 100);
         insertProtocol(2, 101);
 
@@ -84,12 +82,12 @@ class DatabaseConstraintsTest {
 
         assertConstraintFailure(
                 """
-                        INSERT INTO muestra
-                            (id_muestra, id_protocolo, id_producto,
-                             id_serie, numero_muestra, fecha_toma)
-                        VALUES (2, 2, 1, 1, 1, '2026-10-15')
-                        """,
-                "UNIQUE constraint failed: muestra.id_serie, muestra.numero_muestra"
+                INSERT INTO muestra
+                    (id_muestra, id_protocolo, id_producto,
+                     id_serie, numero_correlativo, numero_muestra, fecha_toma)
+                VALUES (2, 2, 1, 1, 1, 2, '2026-10-15')
+                """,
+                "UNIQUE constraint failed: muestra.id_serie, muestra.numero_correlativo"
         );
     }
 
@@ -146,16 +144,18 @@ class DatabaseConstraintsTest {
                 """.formatted(id, number));
     }
 
+
     private void insertSample(int id, int protocolId, int sampleNumber)
             throws SQLException {
 
         insert("""
-                INSERT INTO muestra
-                    (id_muestra, id_protocolo, id_producto,
-                     id_serie, numero_muestra, fecha_toma)
-                VALUES (%d, %d, 1, 1, %d, '2026-10-15')
-                """.formatted(id, protocolId, sampleNumber));
+            INSERT INTO muestra
+                (id_muestra, id_protocolo, id_producto,
+                 id_serie, numero_correlativo, numero_muestra, fecha_toma)
+            VALUES (%d, %d, 1, 1, %d, %d, '2026-10-15')
+            """.formatted(id, protocolId, id, sampleNumber));
     }
+
 
     private void insert(String sql) throws SQLException {
         try (Statement statement = connection.createStatement()) {
