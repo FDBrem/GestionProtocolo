@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="teutonic.gestionprotocolos.Controller.AnalysisCardController"
+      fx:id="card"
+      styleClass="analysis-card"
+      prefWidth="245"
+      prefHeight="122"
+      minWidth="220"
+      minHeight="122"
+      maxHeight="122"
+      spacing="7">
+
+    <padding>
+        <Insets top="16"
+                right="16"
+                bottom="14"
+                left="16"/>
+    </padding>
+
+    <Label fx:id="nombreLabel"
+           styleClass="analysis-card-title"
+           wrapText="true"/>
+
+    <Label fx:id="determinacionesLabel"
+           styleClass="analysis-card-description"
+           wrapText="true"/>
+
+    <VBox VBox.vgrow="ALWAYS"/>
+
+    <Label fx:id="muestraLabel"
+           styleClass="analysis-card-sample"/>
+
+</VBox>

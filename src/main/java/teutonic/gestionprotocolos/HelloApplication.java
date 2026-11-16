@@ -1,19 +1,66 @@
 package teutonic.gestionprotocolos;
 
+import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.flywaydb.core.Flyway;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import teutonic.gestionprotocolos.Handler.GlobalExceptionHandler;
+import teutonic.gestionprotocolos.config.DatabaseConfig;
 
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(HelloApplication.class);
+
+    @Override
+    public void init() throws Exception {
+        DatabaseConfig.initialize();
+        DatabaseConfig.verifyConfiguration();
+
+        Flyway.configure()
+                .dataSource(DatabaseConfig.getDatabaseUrl(), null, null)
+                .locations("filesystem:src/main/resources/db/migration")
+                .load()
+                .migrate();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        Thread.setDefaultUncaughtExceptionHandler(
+                new GlobalExceptionHandler()
+        );
+
+        log.info("Aplicación iniciada correctamente");
+
+        Application.setUserAgentStylesheet(
+                new PrimerLight().getUserAgentStylesheet()
+        );
+
+        FXMLLoader fxmlLoader =
+                new FXMLLoader(
+                        HelloApplication.class.getResource("main-view.fxml")
+                );
+
+        Scene scene = new Scene(fxmlLoader.load(), 1600, 900);
+
+        scene.getStylesheets().add(
+                HelloApplication.class
+                        .getResource("styles.css")
+                        .toExternalForm()
+        );
+
+        stage.setTitle("Gestión de Protocolos");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
     }
 }
