@@ -12,7 +12,7 @@ FROM analisis
 WHERE nombre = 'Staphylococcus';
 
 INSERT INTO limite_analisis (id_analisis, limite_maximo)
-SELECT id_analisis, 100.000
+SELECT id_analisis, 100000
 FROM analisis
 WHERE nombre = 'Aerobios';
 
