@@ -26,6 +26,7 @@ public interface ResultadoRepository {
                 conforme,
                 pendiente,
                 observacion,
+                limite_aplicado AS limiteAplicado,
                 creado_en AS creadoEn
             FROM resultado
             WHERE id_resultado = :id
@@ -45,6 +46,7 @@ public interface ResultadoRepository {
                 conforme,
                 pendiente,
                 observacion,
+                limite_aplicado AS limiteAplicado,
                 creado_en AS creadoEn
             FROM resultado
             WHERE id_muestra = :idMuestra
@@ -65,7 +67,8 @@ public interface ResultadoRepository {
                 presencia,
                 conforme,
                 pendiente,
-                observacion
+                observacion,
+                limite_aplicado
             )
             VALUES (
                 :idMuestra,
@@ -77,7 +80,8 @@ public interface ResultadoRepository {
                 :presencia,
                 :conforme,
                 :pendiente,
-                :observacion
+                :observacion,
+                :limiteAplicado
             )
             """)
     @GetGeneratedKeys("id_resultado")
@@ -91,7 +95,8 @@ public interface ResultadoRepository {
             @Bind("presencia") Integer presencia,
             @Bind("conforme") Integer conforme,
             @Bind("pendiente") int pendiente,
-            @Bind("observacion") String observacion
+            @Bind("observacion") String observacion,
+            @Bind("limiteAplicado") Double limiteAplicado
     );
 
     @SqlUpdate("""
@@ -104,7 +109,8 @@ public interface ResultadoRepository {
                 presencia = :presencia,
                 conforme = :conforme,
                 pendiente = :pendiente,
-                observacion = :observacion
+                observacion = :observacion,
+                limite_aplicado = :limiteAplicado
             WHERE id_resultado = :id
             """)
     int actualizar(
@@ -116,7 +122,8 @@ public interface ResultadoRepository {
             @Bind("presencia") Integer presencia,
             @Bind("conforme") Integer conforme,
             @Bind("pendiente") int pendiente,
-            @Bind("observacion") String observacion
+            @Bind("observacion") String observacion,
+            @Bind("limiteAplicado") Double limiteAplicado
     );
 
     @SqlUpdate("""
@@ -145,7 +152,8 @@ public interface ResultadoRepository {
                 resultado.presencia(),
                 resultado.conforme(),
                 resultado.pendiente() != null ? resultado.pendiente() : 0,
-                resultado.observacion()
+                resultado.observacion(),
+                resultado.limiteAplicado()
         );
     }
 
@@ -159,7 +167,8 @@ public interface ResultadoRepository {
                 resultado.presencia(),
                 resultado.conforme(),
                 resultado.pendiente() != null ? resultado.pendiente() : 0,
-                resultado.observacion()
+                resultado.observacion(),
+                resultado.limiteAplicado()
         );
     }
 }

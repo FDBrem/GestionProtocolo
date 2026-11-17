@@ -1,4 +1,4 @@
-package teutonic.gestionprotocolos.Handler;
+package teutonic.gestionprotocolos.handler;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
