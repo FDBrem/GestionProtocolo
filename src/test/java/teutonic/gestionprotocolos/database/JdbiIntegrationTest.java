@@ -42,8 +42,8 @@ class JdbiIntegrationTest {
 
             handle.execute("""
                     INSERT INTO producto
-                        (id_producto, nombre, id_serie)
-                    VALUES (1, 'Producto test', 1)
+                        (id_producto, nombre, id_serie, nombre_normalizado)
+                    VALUES (1, 'Producto test', 1, 'producto test');
                     """);
 
             handle.execute("""

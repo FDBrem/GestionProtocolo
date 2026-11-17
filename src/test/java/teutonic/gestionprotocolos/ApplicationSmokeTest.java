@@ -22,6 +22,7 @@ class ApplicationSmokeTest {
     @Test
     void mainWindowOpens() {
         assertThat(stage.isShowing()).isTrue();
-        assertThat(stage.getTitle()).isEqualTo("Hello!");
+        assertThat(stage.getTitle())
+                .isEqualTo("Gestión de Protocolos");
     }
 }
