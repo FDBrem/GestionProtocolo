@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import teutonic.gestionprotocolos.Handler.GlobalExceptionHandler;
+import teutonic.gestionprotocolos.handler.GlobalExceptionHandler;
 import teutonic.gestionprotocolos.config.DatabaseConfig;
 
 import java.io.IOException;

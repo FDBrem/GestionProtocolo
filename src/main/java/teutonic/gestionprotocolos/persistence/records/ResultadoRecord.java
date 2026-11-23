@@ -12,5 +12,6 @@ public record ResultadoRecord(
         Integer conforme,
         Integer pendiente,
         String observacion,
+        Double limiteAplicado,
         String creadoEn
 ) {}

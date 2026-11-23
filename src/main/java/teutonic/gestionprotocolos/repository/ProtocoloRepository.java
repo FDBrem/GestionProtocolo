@@ -52,19 +52,40 @@ public interface ProtocoloRepository {
             INSERT INTO protocolo (
                 id_plantilla,
                 numero,
-                fecha
+                fecha,
+                id_cliente,
+                metodo,
+                equipo,
+                peso_muestra_g,
+                superficie_cm2,
+                analista,
+                observaciones
             )
             VALUES (
-                :plantilla,
+                :idPlantilla,
                 :numero,
-                :fecha
+                :fecha,
+                :idCliente,
+                :metodo,
+                :equipo,
+                :pesoMuestraG,
+                :superficieCm2,
+                :analista,
+                :observaciones
             )
             """)
     @GetGeneratedKeys("id_protocolo")
     long insertar(
-            @Bind("plantilla") long plantilla,
+            @Bind("idPlantilla") long idPlantilla,
             @Bind("numero") Integer numero,
-            @Bind("fecha") LocalDate fecha
+            @Bind("fecha") LocalDate fecha,
+            @Bind("idCliente") Long idCliente,
+            @Bind("metodo") String metodo,
+            @Bind("equipo") String equipo,
+            @Bind("pesoMuestraG") Double pesoMuestraG,
+            @Bind("superficieCm2") Double superficieCm2,
+            @Bind("analista") String analista,
+            @Bind("observaciones") String observaciones
     );
 
     @SqlUpdate("""
@@ -117,6 +138,18 @@ public interface ProtocoloRepository {
             WHERE id_protocolo = :id
             """)
     int eliminar(@Bind("id") long id);
+
+    //esto es para que el contador se incremente dentro de la misma transaccion del registro
+    @SqlQuery("""
+            INSERT INTO contador_protocolo (id_plantilla, ultimo_numero)
+            VALUES (:idPlantilla, 1)
+            ON CONFLICT (id_plantilla)
+            DO UPDATE SET ultimo_numero = ultimo_numero + 1
+            RETURNING ultimo_numero
+            """)
+    int obtenerSiguienteNumero(
+            @Bind("idPlantilla") long idPlantilla
+    );
 
     // Métodos de conveniencia compatibles
     default Optional<ProtocoloRecord> findById(long id) {
