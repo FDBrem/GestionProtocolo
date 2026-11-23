@@ -5,7 +5,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import teutonic.gestionprotocolos.model.TipoDefecto;
 import teutonic.gestionprotocolos.persistence.records.TipoDefectoRecord;
-import teutonic.gestionprotocolos.util.NombreNormalizer;
 
 @Mapper
 public interface TipoDefectoMapper {
@@ -16,7 +15,7 @@ public interface TipoDefectoMapper {
 
     @Mapping(
             target = "nombreNormalizado",
-            expression = "java(NombreNormalizer.normalizar(tipoDefecto.nombre()))"
+            expression = "java(teutonic.gestionprotocolos.util.NombreNormalizer.normalizar(tipoDefecto.nombre()))"
     )
     TipoDefectoRecord toRecord(TipoDefecto tipoDefecto);
 }

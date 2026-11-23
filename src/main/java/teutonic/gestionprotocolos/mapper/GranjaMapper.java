@@ -5,7 +5,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import teutonic.gestionprotocolos.model.Granja;
 import teutonic.gestionprotocolos.persistence.records.GranjaRecord;
-import teutonic.gestionprotocolos.util.NombreNormalizer;
 
 @Mapper
 public interface GranjaMapper {
@@ -16,7 +15,7 @@ public interface GranjaMapper {
 
     @Mapping(
             target = "nombreNormalizado",
-            expression = "java(NombreNormalizer.normalizar(granja.nombre()))"
+            expression = "java(teutonic.gestionprotocolos.util.NombreNormalizer.normalizar(granja.nombre()))"
     )
     GranjaRecord toRecord(Granja granja);
 }

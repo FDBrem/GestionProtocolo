@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import teutonic.gestionprotocolos.model.Producto;
 import teutonic.gestionprotocolos.persistence.records.ProductoRecord;
-import teutonic.gestionprotocolos.util.NombreNormalizer;
+
 
 @Mapper
 public interface ProductoMapper {
@@ -16,7 +16,7 @@ public interface ProductoMapper {
 
     @Mapping(
             target = "nombreNormalizado",
-            expression = "java(NombreNormalizer.normalizar(producto.nombre()))"
+            expression = "java(teutonic.gestionprotocolos.util.NombreNormalizer.normalizar(producto.nombre()))"
     )
     ProductoRecord toRecord(Producto producto);
 }
