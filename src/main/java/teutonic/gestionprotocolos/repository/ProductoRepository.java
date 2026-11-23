@@ -16,9 +16,9 @@ import java.util.Optional;
 @RegisterConstructorMapper(ProductoRecord.class)
 public interface ProductoRepository {
 
-    // =========================================================
+    // ---------------------------------------------------------
     // CONSULTAS
-    // =========================================================
+    // ---------------------------------------------------------
 
     @SqlQuery("""
             SELECT
@@ -59,9 +59,9 @@ public interface ProductoRepository {
             """)
     List<ProductoRecord> listarActivas();
 
-    // =========================================================
+    // ---------------------------------------------------------
     // BÚSQUEDA POR NOMBRE
-    // =========================================================
+    // ---------------------------------------------------------
 
     @SqlQuery("""
             SELECT
@@ -78,10 +78,6 @@ public interface ProductoRepository {
             @Bind("nombreNormalizado") String nombreNormalizado
     );
 
-    /**
-     * Normaliza el texto recibido antes de realizar la búsqueda.
-     * La búsqueda incluye productos activos e inactivos.
-     */
     default List<ProductoRecord> buscarPorNombre(String nombre) {
 
         String normalizado = NombreNormalizer.normalizar(nombre);
@@ -93,14 +89,10 @@ public interface ProductoRepository {
         return buscarPorNombreNormalizado(normalizado);
     }
 
-    // =========================================================
-    // VALIDACIÓN DE DUPLICADOS
-    // =========================================================
+    // ---------------------------------------------------------
+    // CONTROL DE DUPLICADOS
+    // ---------------------------------------------------------
 
-    /**
-     * Comprueba si ya existe un producto con ese nombre normalizado.
-     * Incluye productos inactivos.
-     */
     @SqlQuery("""
             SELECT EXISTS (
                 SELECT 1
@@ -112,10 +104,6 @@ public interface ProductoRepository {
             @Bind("nombreNormalizado") String nombreNormalizado
     );
 
-    /**
-     * Comprueba si otro producto utiliza el mismo nombre normalizado.
-     * Permite excluir el producto que se está modificando.
-     */
     @SqlQuery("""
             SELECT EXISTS (
                 SELECT 1
@@ -129,9 +117,30 @@ public interface ProductoRepository {
             @Bind("id") long id
     );
 
-    // =========================================================
-    // ALTA
-    // =========================================================
+    default boolean existeNombre(String nombre) {
+
+        String normalizado = NombreNormalizer.normalizar(nombre);
+
+        return !normalizado.isBlank()
+                && existeNombreNormalizado(normalizado);
+    }
+
+    default boolean existeNombreParaOtroProducto(
+            String nombre,
+            long id
+    ) {
+        String normalizado = NombreNormalizer.normalizar(nombre);
+
+        return !normalizado.isBlank()
+                && existeNombreNormalizadoParaOtroProducto(
+                normalizado,
+                id
+        );
+    }
+
+    // ---------------------------------------------------------
+    // INSERTAR
+    // ---------------------------------------------------------
 
     @SqlUpdate("""
             INSERT INTO producto (
@@ -148,35 +157,48 @@ public interface ProductoRepository {
             )
             """)
     @GetGeneratedKeys("id_producto")
-    long insertar(
+    long insertarNormalizado(
             @Bind("nombre") String nombre,
             @Bind("idSerie") Long idSerie,
             @Bind("activo") boolean activo,
             @Bind("nombreNormalizado") String nombreNormalizado
     );
 
-    default long insertar(ProductoRecord producto) {
-        return insertar(
-                producto.nombre(),
-                producto.idSerie(),
-                producto.activo(),
-                producto.nombreNormalizado()
+    default long insertar(
+            String nombre,
+            Long idSerie,
+            boolean activo
+    ) {
+        String normalizado = NombreNormalizer.normalizar(nombre);
+
+        if (normalizado.isBlank()) {
+            throw new IllegalArgumentException(
+                    "El nombre del producto no puede estar vacío"
+            );
+        }
+
+        return insertarNormalizado(
+                nombre,
+                idSerie,
+                activo,
+                normalizado
         );
     }
 
-    // =========================================================
-    // MODIFICACIÓN
-    // =========================================================
+    // ---------------------------------------------------------
+    // ACTUALIZAR
+    // ---------------------------------------------------------
 
     @SqlUpdate("""
             UPDATE producto
-            SET nombre = :nombre,
+            SET
+                nombre = :nombre,
                 id_serie = :idSerie,
                 activo = :activo,
                 nombre_normalizado = :nombreNormalizado
             WHERE id_producto = :id
             """)
-    int actualizar(
+    int actualizarNormalizado(
             @Bind("id") long id,
             @Bind("nombre") String nombre,
             @Bind("idSerie") Long idSerie,
@@ -184,19 +206,32 @@ public interface ProductoRepository {
             @Bind("nombreNormalizado") String nombreNormalizado
     );
 
-    default int actualizar(ProductoRecord producto) {
-        return actualizar(
-                producto.idProducto(),
-                producto.nombre(),
-                producto.idSerie(),
-                producto.activo(),
-                producto.nombreNormalizado()
+    default int actualizar(
+            long id,
+            String nombre,
+            Long idSerie,
+            boolean activo
+    ) {
+        String normalizado = NombreNormalizer.normalizar(nombre);
+
+        if (normalizado.isBlank()) {
+            throw new IllegalArgumentException(
+                    "El nombre del producto no puede estar vacío"
+            );
+        }
+
+        return actualizarNormalizado(
+                id,
+                nombre,
+                idSerie,
+                activo,
+                normalizado
         );
     }
 
-    // =========================================================
-    // BAJA LÓGICA
-    // =========================================================
+    // ---------------------------------------------------------
+    // BAJA LÓGICA Y REACTIVACIÓN
+    // ---------------------------------------------------------
 
     @SqlUpdate("""
             UPDATE producto
@@ -207,10 +242,6 @@ public interface ProductoRepository {
             @Bind("id") long id
     );
 
-    // =========================================================
-    // REACTIVACIÓN
-    // =========================================================
-
     @SqlUpdate("""
             UPDATE producto
             SET activo = 1
@@ -219,17 +250,4 @@ public interface ProductoRepository {
     int activar(
             @Bind("id") long id
     );
-
-    // =========================================================
-    // MÉTODOS DE CONVENIENCIA
-    // =========================================================
-
-    default Optional<ProductoRecord> findById(long id) {
-        return buscarPorId(id);
-    }
-
-    default List<ProductoRecord> findAll() {
-        return listarTodas();
-    }
 }
-

@@ -59,10 +59,17 @@ class JdbiIntegrationTest {
     @Test
     void insertsAndReadsProtocol() {
         ProtocoloRecord expected = new ProtocoloRecord(
-                1,
-                1,
-                100,
-                LocalDate.of(2026, 10, 15)
+                1L,                         // idProtocolo
+                1L,                         // idPlantilla
+                100,                        // numero
+                LocalDate.of(2026, 10, 15), // fecha
+                null,                       // idCliente
+                null,                       // metodo
+                null,                       // equipo
+                null,                       // pesoMuestraG
+                null,                       // superficieCm2
+                null,                       // analista
+                null                        // observaciones
         );
 
         jdbi.useExtension(

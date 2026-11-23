@@ -19,7 +19,14 @@ public interface ProtocoloRepository {
                 id_protocolo AS idProtocolo,
                 id_plantilla AS idPlantilla,
                 numero,
-                fecha
+                fecha,
+                id_cliente AS idCliente,
+                metodo,
+                equipo,
+                peso_muestra_g AS pesoMuestraG,
+                superficie_cm2 AS superficieCm2,
+                analista,
+                observaciones
             FROM protocolo
             WHERE id_protocolo = :id
             """)
@@ -30,7 +37,14 @@ public interface ProtocoloRepository {
                 id_protocolo AS idProtocolo,
                 id_plantilla AS idPlantilla,
                 numero,
-                fecha
+                fecha,
+                id_cliente AS idCliente,
+                metodo,
+                equipo,
+                peso_muestra_g AS pesoMuestraG,
+                superficie_cm2 AS superficieCm2,
+                analista,
+                observaciones
             FROM protocolo
             ORDER BY id_protocolo DESC
             """)
@@ -41,7 +55,14 @@ public interface ProtocoloRepository {
                 id_protocolo AS idProtocolo,
                 id_plantilla AS idPlantilla,
                 numero,
-                fecha
+                fecha,
+                id_cliente AS idCliente,
+                metodo,
+                equipo,
+                peso_muestra_g AS pesoMuestraG,
+                superficie_cm2 AS superficieCm2,
+                analista,
+                observaciones
             FROM protocolo
             WHERE id_plantilla = :idPlantilla
             ORDER BY numero DESC
