@@ -1,7 +1,9 @@
 package teutonic.gestionprotocolos.persistence.records;
 
+/** Representación de persistencia de una granja. */
 public record GranjaRecord(
-        Long idGranja,
+        long idGranja,
         String nombre,
-        Integer activo
+        boolean activo,
+        String nombreNormalizado
 ) {}
