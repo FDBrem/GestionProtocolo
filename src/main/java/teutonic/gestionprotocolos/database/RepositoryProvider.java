@@ -58,4 +58,7 @@ public final class RepositoryProvider {
     public static LimiteAnalisisRepository getLimiteAnalisisRepository() {
         return JDBI.onDemand(LimiteAnalisisRepository.class);
     }
+    public static TipoDefectoRepository getTipoDefectoRepository() {
+        return JDBI.onDemand(TipoDefectoRepository.class);
+    }
 }
