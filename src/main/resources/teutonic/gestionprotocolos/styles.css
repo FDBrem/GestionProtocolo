@@ -491,3 +491,154 @@
 .primary-action:pressed {
     -fx-background-color: #0B5F62;
 }
+
+/* =========================================
+   CAT-02 - Gestión de catálogos
+   ========================================= */
+
+.catalogo-root {
+    -fx-background-color: #F1F4F7;
+    -fx-padding: 30;
+}
+
+.catalogo-title {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #263746;
+}
+
+.catalogo-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #778694;
+}
+
+.catalogo-selector {
+    -fx-padding: 0 0 5 0;
+}
+
+.catalogo-tab {
+    -fx-background-color: transparent;
+    -fx-text-fill: #647583;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 22 10 22;
+    -fx-background-radius: 7;
+    -fx-cursor: hand;
+}
+
+.catalogo-tab:hover {
+    -fx-background-color: #E2EAED;
+    -fx-text-fill: #1F5A6B;
+}
+
+.catalogo-panel,
+.catalogo-form-panel {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-border-color: #E1E7EB;
+    -fx-border-radius: 10;
+    -fx-padding: 20;
+}
+
+.catalogo-search,
+.catalogo-input {
+    -fx-background-color: #F7F9FA;
+    -fx-border-color: #DCE4E8;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 10;
+    -fx-font-size: 13px;
+}
+
+.catalogo-search:focused,
+.catalogo-input:focused {
+    -fx-border-color: #1F7A83;
+    -fx-background-color: #FFFFFF;
+}
+
+.primary-button {
+    -fx-background-color: #1F5A6B;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 16 10 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: #174653;
+}
+
+.secondary-button {
+    -fx-background-color: #E9EEF1;
+    -fx-text-fill: #405563;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 16 10 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #DCE5E9;
+}
+
+.catalogo-table {
+    -fx-background-color: transparent;
+    -fx-border-color: #E1E7EB;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.catalogo-table .column-header-background {
+    -fx-background-color: #F3F6F8;
+}
+
+.catalogo-table .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+    -fx-border-color: transparent transparent #E1E7EB transparent;
+}
+
+.catalogo-table .column-header .label {
+    -fx-text-fill: #526574;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.catalogo-table .table-row-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #EDF0F2 transparent;
+    -fx-cell-size: 42px;
+}
+
+.catalogo-table .table-row-cell:hover {
+    -fx-background-color: #F3F8F9;
+}
+
+.catalogo-table .table-row-cell:selected {
+    -fx-background-color: #DCECEF;
+}
+
+.catalogo-table .table-row-cell:selected .text {
+    -fx-fill: #1F5A6B;
+}
+
+.catalogo-form-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #263746;
+}
+
+.catalogo-field-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #526574;
+}
+
+.catalogo-message {
+    -fx-font-size: 12px;
+    -fx-text-fill: #1F7A83;
+}
